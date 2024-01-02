@@ -10,7 +10,6 @@ import menuLight from "../assets/images/menu-light.png";
 import { contentData } from "../assets/data.js"; // Import the data
 import { useContext } from "react";
 import GlobalContext from "./context/GlobalContext.js";
-import Button from "./Button.jsx";
 
 export function Header() {
 

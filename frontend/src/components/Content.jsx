@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import GlobalContext from './context/GlobalContext'
 import { contentData } from '../assets/data'
 import PopUp from './PopUp'
@@ -7,7 +7,7 @@ import './Content.css'
 
 const Content = () => {
 
-  const { isChecked, showSuccessBanner, setIsChecked, data, setSelectItemById, setSelectedItem, selectRename } = useContext(GlobalContext)
+  const { showSuccessBanner, data, setSelectItemById, setSelectedItem, selectRename } = useContext(GlobalContext)
   function findName(id) {
     for (let i = 0; i < contentData.length; i++) {
       if (id === contentData[i].id) {
@@ -20,11 +20,9 @@ const Content = () => {
     if (e.target.checked) {
       setSelectItemById(item)
       setSelectedItem(true)
-      setIsChecked(true)
     }
     else {
       setSelectedItem(false)
-      setIsChecked(false)
       setSelectItemById({})
     }
   }
