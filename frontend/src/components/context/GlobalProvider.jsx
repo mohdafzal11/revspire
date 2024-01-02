@@ -12,17 +12,18 @@ const GlobalContextProvider = ({ children }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [showSuccessBanner, setShowSuccessBanner] = useState(false);
 
+     const fetchAllContent =async()=>{
+        const apiUrl='http://localhost:3000/view-all-content';
+        axios.get(apiUrl)
+        .then(response=>{
+            setData(response.data)
+        })
+        .catch(error=>{
+            console.log(error)
+        })
 
-    const fetchAllContent = async () => {
-        setIsChecked(false)
-        try {
-            const response = await fetch('http://localhost:3000/view-all-content');
-            const result = await response.json();
-            setData(result); // Update the state with the fetched data
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+     }
+
     useEffect(() => {
         fetchAllContent()
     }, [])
