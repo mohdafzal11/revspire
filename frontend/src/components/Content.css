@@ -1,0 +1,35 @@
+.heading-container{
+    display: flex;
+}
+h3{
+    width: 200px;
+
+}
+
+.item-container{
+    display: flex;
+    margin: 10px 0px;
+    cursor: pointer;
+
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+}
+.checkbox-round {
+    width: 1em;
+    height: 1em;
+    background-color: rgb(215, 212, 212);
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+.checkbox-round:checked {
+    background-color: rgb(158, 224, 158);
+}
+
+
