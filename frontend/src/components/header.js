@@ -99,14 +99,17 @@ export function Header() {
         <div className="header-slidebar-btn" onClick={toggleSidebar}>
           <img src={theme === "light" ? menuLight : menuDark} />
         </div>
-        <div className="header-left">
+        <div className="header-left bg-[#fdfdfd] border-2">
           <p className="rev-txt">RevSpire Enablement</p>
-          <div className="header-left-searchbox">
+          <div className="header-left-searchbox border-2 rounded-full flex">
             <input
-              className="search-input"
+              className="search-input pl-[10px]"
               type="text"
               placeholder="Hinted search text"
             />
+           <span className="pr-[10px] pt-[3px]"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg></span>
           </div>
         </div>
         <div className="header-btn">
@@ -117,7 +120,7 @@ export function Header() {
           />
         </div>
 
-        <div className="header-profile">
+        <div className="header-profile border-2 rounded-lg">
           <div className="profile-btn">
             <div className="profile-btn-left">
               <img src={user} alt="User" />

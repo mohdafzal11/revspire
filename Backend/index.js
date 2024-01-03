@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// MySQL Database Configuration. Replace with your creditials or use a .env variable
+// MySQL Database Configuration
 const dbConfig = {
     host: 'localhost',
     user: 'root',
@@ -23,7 +23,6 @@ const dbConfig = {
 // Endpoint to view all content
 app.get('/view-all-content', async (req, res) => {
     const viewer_id = req.body.viewer_id;
-    console.log("request from the front end")
 
     try {
         const connection = await mysql.createConnection(dbConfig);
@@ -195,7 +194,7 @@ app.get('/view-folder/:folderId', async (req, res) => {
         connection.end();
 
         if (!folder.length) {
-            return res.status(404).json({ success: false, message: 'Folder not found.' });
+            return res.status(404).json({ success: false, message: 'Folder not found' });
         }
 
         res.json({ success: true, folder: folder[0] });
@@ -211,13 +210,13 @@ app.get('/view-all-folders', async (req, res) => {
         const connection = await mysql.createConnection(dbConfig);
 
         // Fetch all folders from the database
-        const [folders] = await connection.query(`
+        const [allfolders] = await connection.query(`
             SELECT * 
             FROM folder`);
 
         connection.end();
 
-        res.json({ success: true, folders });
+        res.json({ success: true, folders: allfolders });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
@@ -426,7 +425,7 @@ app.post('/view-content-and-folders-sorted', async (req, res) => {
         LEFT JOIN user AS creator ON c.created_by = creator.id
         LEFT JOIN user AS updater ON c.updated_by = updater.id
         WHERE c.folder = ?`;
-    
+
         // Execute queries to fetch folders and content
         const [folders] = await connection.query(folderQuery, [folder_id]);
         const [content] = await connection.query(contentQuery, [folder_id]);
@@ -447,6 +446,7 @@ app.post('/view-content-and-folders-sorted', async (req, res) => {
 // Endpoint to retrieve the table name based on record_id
 app.post('/get-table-name', async (req, res) => {
     const record_id = req.body.record_id;
+    console.log( record_id)
 
     // Validate record_id field
     if (!record_id || record_id.length < 3) {
@@ -483,6 +483,7 @@ app.post('/get-table-name', async (req, res) => {
     }
 });
 
+   
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
