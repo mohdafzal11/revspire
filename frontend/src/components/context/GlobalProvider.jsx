@@ -4,8 +4,8 @@ import axios from 'axios'
 
 const GlobalContextProvider = ({ children }) => {
 
-    // this state is for checkbox is selected or not
-    const [selectedItem, setSelectedItem] = useState(false)
+    // showing the rename button
+    const [showRenameButton, setShowRenameButton] = useState(false);
 
     // this state is for theme
     const [theme, setTheme] = useState('light')
@@ -14,8 +14,10 @@ const GlobalContextProvider = ({ children }) => {
     const [data, setData] = useState({});
 
 
-    // this state is for popup is shown or not
-    const [selectRename, setSelectRename] = useState(false)
+    // state popup is shown or not
+    // const [selectRename, setSelectRename] = useState(false)
+    const [showRenamePopup, setShowRenamePopup] = useState(false);
+
 
     // this state is containing the new name
     const [renameValue, setRenameValue] = useState("")
@@ -43,8 +45,8 @@ const GlobalContextProvider = ({ children }) => {
     }, [])
 
 
-
-    const updateContentHandler = async () => {
+    // handler function for saving the data to the database
+    const updateButtonHandler = async () => {
 
         const updatedData = {
             updated_by: selectItemById.updated_by,
@@ -56,13 +58,13 @@ const GlobalContextProvider = ({ children }) => {
         axios.patch(apiUrl, updatedData)
             .then(response => {
                 fetchAllContent()
-                setSelectedItem(false)
-                setSelectRename(false)
+                setShowRenameButton(false)
+                setShowRenamePopup(false)
                 setShowSuccessBanner(true);
 
                 setTimeout(() => {
                     setShowSuccessBanner(false);
-                }, 2000);
+                }, 5000);
 
                 console.log("COntent updated successflyyu", response.data);
             })
@@ -72,7 +74,7 @@ const GlobalContextProvider = ({ children }) => {
     };
 
     return (
-        <GlobalContext.Provider value={{ showSuccessBanner, updateContentHandler, selectItemById, setSelectItemById, renameValue, setRenameValue, selectedItem, setSelectedItem, theme, setTheme, data, setData, selectRename, setSelectRename }}>
+        <GlobalContext.Provider value={{ showSuccessBanner, updateButtonHandler, selectItemById, setSelectItemById, renameValue, setRenameValue, showRenameButton, setShowRenameButton, theme, setTheme, data, setData, showRenamePopup, setShowRenamePopup }}>
             {children}
         </GlobalContext.Provider>
     )

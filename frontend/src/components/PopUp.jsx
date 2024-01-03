@@ -1,15 +1,15 @@
-import React  , {useState , useContext} from 'react'
+import React  , {useContext} from 'react'
 import GlobalContext from './context/GlobalContext'
 
 const PopUp = () => {
-    const {updateContentHandler,renameValue , setRenameValue  , setSelectRename}=useContext(GlobalContext);
+    const {updateButtonHandler,renameValue , setRenameValue  , setShowRenamePopup}=useContext(GlobalContext);
 
     function renameHandler (e){   
         setRenameValue(e.target.value)
     }
 
-    function cancelHandler(){
-        setSelectRename(false)
+    function cancelButtonHandler(){
+        setShowRenamePopup(false)
     }
     return (
         <div>
@@ -18,8 +18,8 @@ const PopUp = () => {
                 <h1 className='ml-[15px] mt-[25px]'>Name:</h1>
                 <input className="pl-[5px] w-[240px] mt-[20px] rounded-md border-slate-400	 border-2 ml-[15px]" type="text" vlaue={renameValue} onChange={renameHandler}/>
                 <div className='flex justify-center'>
-                    <button onClick={cancelHandler} className='bg-pink-300 rounded-xl mx-[20px] border-slate-400 px-[15px] border-2 mt-[20px] w-[100px]'>Cancel</button>
-                    <button onClick={updateContentHandler} className=' rounded-xl mx-[20px]  border-slate-400 px-[15px] border-2 mt-[20px] w-[100px]'>Save</button>
+                    <button onClick={cancelButtonHandler} className='bg-pink-400 rounded-xl mx-[20px] border-slate-400 px-[15px] border-2 mt-[20px] w-[100px]'>Cancel</button>
+                    <button onClick={updateButtonHandler} className=' rounded-xl mx-[20px]  border-slate-400 px-[15px] border-2 mt-[20px] w-[100px]'>Save</button>
                 </div>
             </div>
         </div>

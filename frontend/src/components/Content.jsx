@@ -7,7 +7,7 @@ import './Content.css'
 
 const Content = () => {
 
-  const { showSuccessBanner, data, setSelectItemById, setSelectedItem, selectRename } = useContext(GlobalContext)
+  const { showSuccessBanner, data, setSelectItemById, setShowRenameButton, showRenamePopup } = useContext(GlobalContext)
   function findName(id) {
     for (let i = 0; i < contentData.length; i++) {
       if (id === contentData[i].id) {
@@ -16,13 +16,13 @@ const Content = () => {
 
     }
   }
-  const renameValueHandler = (e, item) => {
+  const checkboxButtonHandler = (e, item) => {
     if (e.target.checked) {
       setSelectItemById(item)
-      setSelectedItem(true)
+      setShowRenameButton(true)
     }
     else {
-      setSelectedItem(false)
+      setShowRenameButton(false)
       setSelectItemById({})
     }
   }
@@ -39,16 +39,16 @@ const Content = () => {
         <h3>Modified Date</h3>
         <h3>Size</h3>
       </div>
-      {showSuccessBanner && <div className='bg-green-600 fixed right-0 mr-[20px] px-[20px] py-[10px] rounded-md '>
-        Save Successful!
+      {  showSuccessBanner && <div className='fixed right-0 mr-[20px] px-[20px] py-[20px] rounded-lg border-2	 '>
+         <span className='mr-[20px] text-green-700 border-2 border-green-900 px-[12px] py-[8px] rounded-full'>&#10004;</span>Rename Successful
       </div>}
-      {selectRename && <PopUp></PopUp>}
+      {showRenamePopup && <PopUp></PopUp>}
       <div>
         {
           Array.isArray(data.content) && data.content.map(item => (
             <ul key={item.id}>
               <div className='item-container cursor-pointrer'>
-                <p className='mr-[10px] '><input type="checkbox" className="checkbox-round" onClick={(e) => { renameValueHandler(e, item) }} /></p>
+                <p className='mr-[10px] '><input type="checkbox" className="checkbox-round" onClick={(e) => { checkboxButtonHandler(e, item) }} /></p>
                 <p className='w-[200px] '>{item.name.substring(-1, 20)}</p>
                 <p className='w-[200px] '>{item.source}</p>
                 <p className='w-[200px] '>{findName(item.created_by)}</p>

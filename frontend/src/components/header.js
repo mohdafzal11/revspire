@@ -13,7 +13,7 @@ import GlobalContext from "./context/GlobalContext.js";
 
 export function Header() {
 
-  const { theme, setTheme, selectedItem, selectRename, setSelectRename } = useContext(GlobalContext);
+  const { theme, setTheme, showRenameButton, setShowRenamePopup } = useContext(GlobalContext);
 
   let toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
@@ -40,8 +40,9 @@ export function Header() {
   const [folderIdInput, setFolderIdInput] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const renameHandler = () => {
-    setSelectRename(!selectRename)
+  //  Handler funtion for showing the rename button
+  const renameButtonHandler = () => {
+    setShowRenamePopup(true)
   }
 
   // Function to find viewer's name based on viewer_id
@@ -163,9 +164,9 @@ export function Header() {
       </div>
       <div className="header-2">
         <div>
-          {!selectedItem && <button className='mr-[20px] w-[100px] py-[2px] rounded-full px-[15px] border-2 border-gray-400'>Add</button>}
-          {selectedItem && <div className="flex">
-            <button className='mr-[20px] w-[100px] py-[2px] rounded-full px-[15px] border-2 border-gray-400' onClick={() => {renameHandler() }}>Rename</button>
+          {!showRenameButton && <button className='mr-[20px] w-[100px] py-[2px] rounded-full px-[15px] border-2 border-gray-400'>Add</button>}
+          {showRenameButton && <div className="flex">
+            <button className='mr-[20px] w-[100px] py-[2px] rounded-full px-[15px] border-2 border-gray-400' onClick={() => { renameButtonHandler() }}>Rename</button>
             <button className='mr-[20px] w-[100px] py-[2px] rounded-full px-[15px] border-2 border-gray-400'>Move</button>
             <button className='mr-[20px] w-[100px] py-[2px] rounded-full px-[15px] border-2 border-gray-400'>Copy</button>
             <button className='mr-[20px] w-[100px] py-[2px] rounded-full px-[15px] border-2 border-gray-400'>Download</button>
